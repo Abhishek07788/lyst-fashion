@@ -7,10 +7,10 @@ This website is a clone of "lyst.com". Lyst is a global fashion search platform,
 <h3/>
 
 <h2>
-Individual Project | Duration: 04 Days
+Individual Project | Working
 <h2/>
 <h2>
-TECH STACK: REACT | CSS | JAVASCRIPT | JSON SERVER | CHAKRA UI
+TECH STACK: Typescript | Javascript | Next js | CSS | Material UI | Context API | Axios 
 <h2/>
 <img src="https://abhishek07788.github.io/static/media/lystClone.68c3bcb8c86506b93a7f.gif" alt="lyst.com"/>
 
