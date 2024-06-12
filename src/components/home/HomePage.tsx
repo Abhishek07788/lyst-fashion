@@ -9,7 +9,7 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-import HomeData from "../../js/db1.json";
+import HomeData from "../../staticData/db1.json";
 import styles from "../../css/home.module.css";
 // import { ModalComponent } from "./Modal";
 

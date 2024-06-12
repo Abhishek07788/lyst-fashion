@@ -1,8 +1,8 @@
 import { Grid } from "@mui/material";
 import React from "react";
 import Navbar from "./Navbar";
-import Footer from "./Footer";
 import Head from "next/head";
+import Footer from "./Footer";
 
 interface Props {
   children: React.ReactNode;

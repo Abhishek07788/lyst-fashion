@@ -13,7 +13,7 @@ const Footer = () => {
   };
 
   return (
-    <div
+    <Grid
       style={{
         borderTop: "1px solid black",
         marginTop: "30px",
@@ -119,7 +119,7 @@ const Footer = () => {
           </Grid>
         </Grid>
       </Grid>
-    </div>
+    </Grid>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import {
   AppBar,
+  Avatar,
   Badge,
   Box,
   Button,
@@ -13,15 +14,16 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import { Search as SearchIcon } from "@mui/icons-material";
-import { AuthContext } from "../contexts/AuthContext";
+import { Height, Search as SearchIcon } from "@mui/icons-material";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
 import { styled, alpha } from "@mui/material/styles";
 import { ASSETS } from "../assets/assetsPath";
 import { useTheme } from "@mui/material/styles";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { PATHS } from "../routes";
+import { PATHS, QP } from "../routes";
+import { AuthContext } from "../contexts/AuthContext";
+import ProfileMenu from "../components/profile/ProfileMenu";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -84,9 +86,9 @@ const Navbar = () => {
     };
   }, []);
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      setSearch(e.target.value);
+      setSearch((e.target as HTMLInputElement).value);
       router.push("/search");
     }
   };
@@ -99,9 +101,14 @@ const Navbar = () => {
   const helpAndRegion = (
     <>
       <Typography variant="body1" sx={{ marginRight: "20px" }}>
-        IN-USS
+        IN
       </Typography>
-      <Typography variant="body1" sx={{ marginRight: "20px" }}>
+      <Typography
+        component={NextLink}
+        href={PATHS.help}
+        variant="body1"
+        sx={{ marginRight: "20px" }}
+      >
         Help
       </Typography>
     </>
@@ -172,23 +179,35 @@ const Navbar = () => {
   );
 
   const RegisterButton = (
-    <Button
-      size="small"
-      color="inherit"
-      variant="contained"
-      sx={{
-        backgroundColor: "black",
-        color: "white",
-        borderRadius: "4px",
-        textTransform: "none",
-        marginRight: isMobile ? "5px" : "20px",
-        "&:hover": {
-          bgcolor: "grey",
-        },
-      }}
-    >
-      Sign up or Log in
-    </Button>
+    <>
+      {isAuth ? (
+        <ProfileMenu email={email} />
+      ) : (
+        <Button
+          size="small"
+          color="inherit"
+          variant="contained"
+          onClick={() =>
+            router.push({
+              pathname: PATHS.login,
+              query: { [QP.loginPage]: "login" },
+            })
+          }
+          sx={{
+            backgroundColor: "black",
+            color: "white",
+            borderRadius: "4px",
+            textTransform: "none",
+            marginRight: isMobile ? "5px" : "20px",
+            "&:hover": {
+              bgcolor: "grey",
+            },
+          }}
+        >
+          Login / Sign up
+        </Button>
+      )}
+    </>
   );
 
   return (
