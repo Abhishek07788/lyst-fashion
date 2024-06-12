@@ -1,27 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import {
   Box,
   Button,
-  Container,
   Grid,
   Typography,
-  Modal,
   useTheme,
   useMediaQuery,
 } from "@mui/material";
 import HomeData from "../../staticData/db1.json";
 import styles from "../../css/home.module.css";
-// import { ModalComponent } from "./Modal";
+import { useRouter } from "next/router";
+import { PATHS, QP } from "@/src/routes";
+import { AuthContext } from "@/src/contexts/AuthContext";
 
 const HomePage = () => {
   const theme = useTheme();
+  const { isAuth } = useContext(AuthContext);
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [selectedBox, setSelectedBox] = useState<any>({});
-
+  const router = useRouter();
   const handleClick = (item: any) => {
-    setIsModalVisible(true);
-    setSelectedBox(item);
     localStorage.setItem("details", JSON.stringify(item));
   };
 
@@ -332,19 +329,32 @@ const HomePage = () => {
               variant="h2"
               sx={{ marginTop: "20px", marginLeft: "16px" }}
             >
-              SIGN UP FOR SMARTER SHOPPING
+              {isAuth
+                ? "Shop Awesome Shop SMARTER"
+                : "SIGN UP FOR SMARTER SHOPPING"}
             </Typography>
             <Button
               color="primary"
+              onClick={() => {
+                isAuth
+                  ? router.push(PATHS.men)
+                  : router.push({
+                      pathname: PATHS.login,
+                      query: { [QP.loginPage]: "login" },
+                    });
+              }}
               sx={{
                 backgroundColor: "black",
                 color: "white",
                 width: isMobile ? "200px" : "140px",
                 marginLeft: "16px",
                 marginTop: "10px",
+                "&:hover": {
+                  bgcolor: "black",
+                },
               }}
             >
-              Join➔
+              {isAuth ? "Shop" : "Join ➔"}
             </Button>
           </Box>
         </Grid>
@@ -397,17 +407,6 @@ const HomePage = () => {
           ))}
         </Grid>
       </Grid>
-
-      {/* <Modal
-        open={isModalVisible}
-        onClose={() => setIsModalVisible(false)}
-      >
-        <ModalComponent
-          data={selectedBox}
-          isOpen={isModalVisible}
-          setIsOpen={setIsModalVisible}
-        />
-      </Modal>*/}
     </Grid>
   );
 };

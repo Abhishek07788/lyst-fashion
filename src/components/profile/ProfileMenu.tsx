@@ -19,17 +19,15 @@ export default function ProfileMenu({ email }: { email: string }) {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
-    logOutUser();
     setAnchorEl(null);
   };
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-        <Tooltip title="Account settings">
+        <Tooltip title="Account">
           <IconButton
             onClick={handleClick}
             size="small"
-            sx={{ ml: 2 }}
             aria-controls={open ? "account-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
@@ -108,7 +106,12 @@ export default function ProfileMenu({ email }: { email: string }) {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            logOutUser();
+          }}
+        >
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
