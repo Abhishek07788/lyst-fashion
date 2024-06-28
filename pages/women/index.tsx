@@ -1,13 +1,13 @@
 import Layout from "@/src/layouts/Layout";
-import MenPage from "@/src/screen/men/MenPage";
+import WomenPage from "@/src/screen/women/WomenPage";
 import React from "react";
 
-const Men = () => {
+const Women = () => {
   return (
     <Layout pageName="Men">
-      <MenPage />
+      <WomenPage />
     </Layout>
   );
 };
 
-export default Men;
+export default Women;
